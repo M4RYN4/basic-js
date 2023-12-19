@@ -17,9 +17,20 @@ const HALF_LIFE_PERIOD = 5730;
  * dateSample('WOOT!') => false
  *
  */
-function dateSample(/* sampleActivity */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function dateSample(sampleActivity ) {
+  //half-life time period formula: t1/2 = 0.693/k
+  //λ=0.693/ T (1/2)   1 ln 2 T
+  if (typeof sampleActivity !== 'string') {
+    return false;
+  }
+
+  if (sampleActivity <= 0 || sampleActivity > 15 || isNaN(sampleActivity)) {
+    return false;
+  }
+  let k = 0.693 / HALF_LIFE_PERIOD;
+  let t = Math.ceil(Math.log(MODERN_ACTIVITY / sampleActivity) / k);
+
+  return t;
 }
 
 module.exports = {
